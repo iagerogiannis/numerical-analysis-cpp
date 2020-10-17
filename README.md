@@ -4,4 +4,4 @@ Numerical Analysis contains some basic numerical methods for solving equations, 
 
 ## Installation
 
-Just include ``` numerical-analysis.lib ``` located in ```bash x64\Release``` in your C++ source code and use the methods.
+Just include ``` numerical-analysis.lib ``` located in ``` x64\Release``` in your C++ source code and use the methods.
