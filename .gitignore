@@ -16,16 +16,20 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-#[Rr]elease/
-#[Rr]eleases/
-#x64/
-#x86/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+!x64/Release/numerical-analysis.lib
+!x64/Release/polynomial.lib
+!x64/Release/simple_test.exe
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
