@@ -27,9 +27,9 @@ bld/
 [Oo]bj/
 [Ll]og/
 
-!x64/Release/numerical-analysis.lib
-!x64/Release/polynomial.lib
-!x64/Release/simple_test.exe
+#!x64/Release/numerical-analysis.lib
+#!x64/Release/polynomial.lib
+#!x64/Release/simple_test.exe
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
