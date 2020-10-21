@@ -40,17 +40,28 @@ int main() {
 
     int points = 1000;
 
-    auto start = high_resolution_clock::now();
-
     for (int i = 0; i < points + 1; ++i) {
         double x = (1. / points) * (double)i * 4. + 1.;
         double y = comp_bezier.y_x(x);
     }
 
+    double x0 = 0.;
+    double xn = 10.;
+    int n_ = 1000000;
+    int level = 10;
+
+    auto start = high_resolution_clock::now();
+
+    std::cout << integration::trapezoid(f, x0, xn, n_) << std::endl;
+    std::cout << integration::simpson1_3(f, x0, xn, n_) << std::endl;
+    std::cout << integration::simpson3_8(f, x0, xn, n_) << std::endl;
+    std::cout << integration::romberg(f, x0, xn, level) << std::endl;
+
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
     std::cout << "time taken by function: " << 1e-3 * duration.count() << " milliseconds" << std::endl;
 
+    std::cout << std::endl << "Press ENTER to Continue..." << std::endl;
     std::cin.get();
 
 }
