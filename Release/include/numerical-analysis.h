@@ -93,7 +93,6 @@ namespace splines {
 		void presentMatrix();
 
 		void presentCoefficients();
-
 	};
 
 	class CompositeQuadraticBezier {
