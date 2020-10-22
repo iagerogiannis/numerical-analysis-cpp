@@ -183,20 +183,20 @@ Polynomial Polynomial::legendre(int n_) {
 
     auto* result_coefficients = new double[n_ + 1];
 
-    for (int i = 0; i < n_ + 1; ++i) {
+    for (int i = 0; i < n_ + 2; ++i) {
         result_coefficients[i] = 0.;
     }
 
-    for (int m = 0; m < div(n_, 2).quot + 1; ++m) {
-        result_coefficients[n_ - 2 * m] = pow(-1., m) * factorial(2 * n_ - 2 * m) /
-            (pow(2, n_) * factorial(m) * factorial(n_ - m) * factorial(n_ - 2 * m));
+    int max = 0;
 
+    for (int m = 0; m < div(n_, 2).quot + 1; ++m) {
+        result_coefficients[n_ - 2 * m] = pow(-1., m) * factorial(2 * n_ - 2 * m) / (pow(2, n_) * factorial(m) * factorial(n_ - m) * factorial(n_ - 2 * m));
     }
 
     return { n_, result_coefficients };
 }
 
-Polynomial* Polynomial::lagrange(int n_, const double* x) {
+Polynomial* Polynomial::lagrange(const double* x, int n_) {
 
     auto* lagrange_polynomials = new Polynomial[n_];
     double denominator;

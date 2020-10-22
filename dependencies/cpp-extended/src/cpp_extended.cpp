@@ -1,17 +1,19 @@
 #include "cpp_extended.h"
 
-double* copyDynamicArray(const double* original, int N) {
+#include <iostream>
+
+double* copyDynamicArray(const double* initial_array, int N) {
 
     auto* destination = new double[N];
 
     for (int i = 0; i < N; ++i) {
-        destination[i] = original[i];
+        destination[i] = initial_array[i];
     }
 
     return destination;
 }
 
-double** copyDynamicArray(double** original, int N, int M) {
+double** copyDynamicArray(double** initial_array, int N, int M) {
 
     auto** destination = new double* [N];
     for (int i = 0; i < N; ++i) {
@@ -20,9 +22,48 @@ double** copyDynamicArray(double** original, int N, int M) {
 
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
-            destination[i][j] = original[i][j];
+            destination[i][j] = initial_array[i][j];
         }
     }
 
     return destination;
+}
+
+void quickSort(double* A, int in, bool ascending, int i0)
+{
+    if (i0 < in)
+    {
+        int p = partition(A, i0, in, ascending);
+        quickSort(A, p, ascending, i0);
+        quickSort(A, in, ascending, p + 1);
+    }
+}
+
+int partition(double* A, int i0, int in, bool ascending)
+{
+    int p = i0;
+
+    if (ascending) {
+        for (int j = i0 + 1; j < in; ++j)
+        {
+            if (A[j] <= A[i0])
+            {
+                p++;
+                std::swap(A[p], A[j]);
+            }
+        }
+    }
+    else {
+        for (int j = i0 + 1; j < in; ++j)
+        {
+            if (A[j] >= A[i0])
+            {
+                p++;
+                std::swap(A[p], A[j]);
+            }
+        }
+    }
+
+    std::swap(A[p], A[i0]);
+    return p;
 }

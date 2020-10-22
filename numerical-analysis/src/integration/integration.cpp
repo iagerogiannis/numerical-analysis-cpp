@@ -1,5 +1,12 @@
 #include "integration.h"
 
+#include <iostream>
+#include <functional>
+#include "Polynomial.h"
+#include "..\root_finding\root_finding.h"
+
+using namespace std::placeholders;
+
 double integration::trapezoid(double(*f)(double), double x0, double xn, int n)
 {
 	double I = 0.;
@@ -87,5 +94,28 @@ double integration::romberg(double(*f)(double), double x0, double xn, int level)
 
 double integration::gauss_legendre(double(*f)(double), double x0, double xn, int n)
 {
-	return 0.0;
+	Polynomial p = Polynomial::legendre(n + 1);
+	
+	auto p_x = std::bind(&Polynomial::value, p, _1);
+	auto dp_dx = std::bind(&Polynomial::value, p.derivative(), _1);
+
+	double* x = root_finding::newton_raphson_multiple_roots(p_x, dp_dx, n + 1);
+
+	Polynomial* L = Polynomial::lagrange(x, n + 1);
+
+	auto w = new double[n + 1];
+	for (int i = 0; i < n + 1; ++i) {
+		w[i] = L[i].definite_integral(-1., 1.);
+	}
+
+	double I = 0.;
+	for (int i = 0; i < n + 1; ++i) {
+		I += w[i] * f(0.5 * (x[i] * (xn - x0) + xn + x0));
+	}
+
+	I *= 0.5 * (xn - x0);
+
+	delete[] w;
+
+	return I;
 }

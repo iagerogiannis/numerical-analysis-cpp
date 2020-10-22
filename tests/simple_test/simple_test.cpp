@@ -56,9 +56,11 @@ int main() {
     std::cout << integration::simpson1_3(f, x0, xn, n_) << std::endl;
     std::cout << integration::simpson3_8(f, x0, xn, n_) << std::endl;
     std::cout << integration::romberg(f, x0, xn, level) << std::endl;
+    std::cout << integration::gauss_legendre(f, x0, xn, 8) << std::endl;
 
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
+
     std::cout << "time taken by function: " << 1e-3 * duration.count() << " milliseconds" << std::endl;
 
     std::cout << std::endl << "Press ENTER to Continue..." << std::endl;
