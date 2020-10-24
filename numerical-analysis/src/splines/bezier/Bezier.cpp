@@ -1,6 +1,6 @@
 #include "Bezier.h"
 
-#include <iostream>
+#include <fstream>
 #include <functional>
 #include <cmath>
 
@@ -186,8 +186,50 @@ void splines::Bezier::copyPolynomials(const Bezier &bezier) {
     }
 }
 
-void splines::Bezier::readControlPoints() {
+void splines::Bezier::readControlPoints(std::string filename) {
 
+    ControlPoints = new double* [2];
+
+    std::ifstream cp_file;
+    std::string line;
+
+    cp_file.open(filename);
+    
+    int i = 0;
+    while (std::getline(cp_file, line)) {
+        if (i == 0) {
+            N = std::stoi(line) - 1;
+            ControlPoints[0] = new double[N + 1];
+            ControlPoints[1] = new double[N + 1];
+        } 
+        else {
+            ControlPoints[div((i - 1), (N + 1)).quot][(i - 1) % (N + 1)] = std::stod(line);
+        }
+        ++i;
+    }
+
+    cp_file.close();
+
+    allocateMatrix();
+    allocateCoefficients();
+    allocatePolynomials();
+
+    calculateMatrix();
+    calculateCoefficients();
+
+    Polynomial x_polynomial(N, Coefficients[0]);
+    Polynomial y_polynomial(N, Coefficients[1]);
+
+    Polynomials.x = std::move(x_polynomial);
+    Polynomials.y = std::move(y_polynomial);
+
+    Polynomials.dx_dt = Polynomials.x.derivative();
+    Polynomials.dy_dt = Polynomials.y.derivative();
+
+    for (int i = 0; i < N + 1; ++i) {
+        Polynomial p_i(N, Matrix[i]);
+        Polynomials.p_i[i] = std::move(p_i);
+    }
 }
 
 void splines::Bezier::calculateMatrix() {

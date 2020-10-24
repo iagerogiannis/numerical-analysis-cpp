@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+#include <string>
 #include "Polynomial.h"
 
 struct polynomials {
@@ -41,7 +43,7 @@ namespace splines {
 
         ~Bezier();
 
-        void readControlPoints();
+        void readControlPoints(std::string filename);
 
         double y_x(double x);
 
