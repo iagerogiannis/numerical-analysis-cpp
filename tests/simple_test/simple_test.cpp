@@ -20,7 +20,7 @@ int main() {
     std::cout << root_finding::secant(f, 0., 1.) << std::endl;
     std::cout << root_finding::newton_raphson(f, df_dx, 0) << std::endl;
 
-    splines::Bezier curve;
+    splines::CompositeQuadraticBezier curve;
     curve.readControlPoints("control_points.dat");
 
     int points = 1000;
@@ -53,5 +53,4 @@ int main() {
 
     std::cout << std::endl << "Press ENTER to Continue..." << std::endl;
     std::cin.get();
-
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+#include <string>
 #include "..\bezier\Bezier.h"
 
 struct complex_parameter {
@@ -27,6 +29,8 @@ namespace splines {
         CompositeQuadraticBezier();
         CompositeQuadraticBezier(int N, double** ControlPoints);
         ~CompositeQuadraticBezier();
+
+        void readControlPoints(std::string filename);
 
         complex_parameter translate_t(double) const;
         double x_t(double);
