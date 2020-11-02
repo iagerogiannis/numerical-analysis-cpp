@@ -3,19 +3,18 @@
 #include <iostream>
 #include <cmath>
 #include "cpp_extended.h"
-#include "math_extended.h"
 
 Polynomial::Polynomial() = default;
 
 Polynomial::Polynomial(int n, double* coefficients_)
     : n(n) {
-    coefficients = copyDynamicArray(coefficients_, n + 1);
+        coefficients = arrays::copyDynamicArray(coefficients_, n + 1);
 }
 
 Polynomial::Polynomial(const Polynomial & polynomial) {
 
     n = polynomial.n;
-    coefficients = copyDynamicArray(polynomial.coefficients, n + 1);
+    coefficients = arrays::copyDynamicArray(polynomial.coefficients, n + 1);
 }
 
 Polynomial::Polynomial(Polynomial && polynomial) noexcept {
@@ -46,7 +45,7 @@ Polynomial::~Polynomial() {
 
 void Polynomial::setCoefficients(int n_, double* coefficients_) {
     n = n_;
-    coefficients = copyDynamicArray(coefficients_, n + 1);
+    coefficients = arrays::copyDynamicArray(coefficients_, n + 1);
 }
 
 double Polynomial::value(double x) {
@@ -190,7 +189,7 @@ Polynomial Polynomial::legendre(int n_) {
     int max = 0;
 
     for (int m = 0; m < div(n_, 2).quot + 1; ++m) {
-        result_coefficients[n_ - 2 * m] = pow(-1., m) * factorial(2 * n_ - 2 * m) / (pow(2, n_) * factorial(m) * factorial(n_ - m) * factorial(n_ - 2 * m));
+        result_coefficients[n_ - 2 * m] = pow(-1., m) * math::factorial(2 * n_ - 2 * m) / (pow(2, n_) * math::factorial(m) * math::factorial(n_ - m) * math::factorial(n_ - 2 * m));
     }
 
     return { n_, result_coefficients };

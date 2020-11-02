@@ -10,7 +10,9 @@ struct complex_parameter {
 };
 
 namespace splines {
+
     class CompositeQuadraticBezier {
+
     private:
         int N{};
         int M{};

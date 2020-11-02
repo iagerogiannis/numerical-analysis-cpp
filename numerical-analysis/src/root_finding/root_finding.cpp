@@ -44,6 +44,6 @@ double* root_finding::newton_raphson_multiple_roots(std::function<double(double)
         }
         roots[i] = xk_new;
     }
-    quickSort(roots, n);
+    arrays::quickSort(roots, n);
     return roots;
 }

@@ -10,7 +10,7 @@ splines::CompositeQuadraticBezier::CompositeQuadraticBezier(int N, double** Cont
     M = 2 * N - 3;
     allocateEnrichedCP();
     allocateSectors();
-    ControlPoints = copyDynamicArray(ControlPoints_, 2, N);
+    ControlPoints = arrays::copyDynamicArray(ControlPoints_, 2, N);
     enrichControlPoints();
     calculateSectors();
 }

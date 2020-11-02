@@ -165,9 +165,6 @@
     <ProjectReference Include="..\dependencies\cpp-extended\cpp-extended.vcxproj">
       <Project>{7969ace5-9e24-4e7d-833e-d28050cd8084}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\dependencies\math-extended\math-extended.vcxproj">
-      <Project>{03faf8a1-d9d1-4785-acc2-954dd245d604}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\dependencies\polynomial\polynomial.vcxproj">
       <Project>{c5bfca96-7aa8-4b08-be08-88a5575ed267}</Project>
     </ProjectReference>

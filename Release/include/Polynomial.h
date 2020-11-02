@@ -34,7 +34,7 @@ public:
 
     static Polynomial legendre(int);
 
-    static Polynomial* lagrange(int n_, const double* x);
+    static Polynomial* lagrange(const double* x, int n_);
 
     void present_coefficients();
 

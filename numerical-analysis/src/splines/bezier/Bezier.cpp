@@ -5,7 +5,6 @@
 #include <cmath>
 
 #include "cpp_extended.h"
-#include "math_extended.h"
 #include "Polynomial.h"
 #include "..\..\root_finding\root_finding.h"
 
@@ -16,7 +15,7 @@ splines::Bezier::Bezier() = default;
 splines::Bezier::Bezier(int N, double **cp)
 : N(N)
 {
-    ControlPoints = copyDynamicArray(cp, 2, N + 1);
+    ControlPoints = arrays::copyDynamicArray(cp, 2, N + 1);
 
     allocateMatrix();
     allocateCoefficients();
@@ -43,9 +42,9 @@ splines::Bezier::Bezier(int N, double **cp)
 splines::Bezier::Bezier(const Bezier &bezier) {
 
     N = bezier.N;
-    ControlPoints = copyDynamicArray(bezier.ControlPoints, 2, N + 1);
-    Matrix = copyDynamicArray(bezier.Matrix, N + 1, N + 1);
-    Coefficients = copyDynamicArray(bezier.ControlPoints, 2, N + 1);
+    ControlPoints = arrays::copyDynamicArray(bezier.ControlPoints, 2, N + 1);
+    Matrix = arrays::copyDynamicArray(bezier.Matrix, N + 1, N + 1);
+    Coefficients = arrays::copyDynamicArray(bezier.ControlPoints, 2, N + 1);
 
     allocatePolynomials();
     copyPolynomials(bezier);
@@ -238,7 +237,7 @@ void splines::Bezier::calculateMatrix() {
             if (j<i) {
                 Matrix[i][j] = 0.;
             } else {
-                Matrix[i][j] = (double)(pow(-1, j-i) * factorial(N) / (factorial(i) * factorial(j-i) * factorial(N - j)));
+                Matrix[i][j] = (double)(pow(-1, j-i) * math::factorial(N) / (math::factorial(i) * math::factorial(j-i) * math::factorial(N - j)));
             }
         }
     }
@@ -255,13 +254,6 @@ void splines::Bezier::calculateCoefficients() {
     }
 }
 
-double splines::Bezier::y_x(double x) {
-    auto x_ = std::bind(&splines::Bezier::x_t, this, _1);
-    auto dx_dt_ = std::bind(&splines::Bezier::dx_dt, this, _1);
-    double t0 = root_finding::newton_raphson([&x_, &x](double t){return x_(t) - x;}, dx_dt_, 0.5);
-    return y_t(t0);
-}
-
 double splines::Bezier::x_t(double t) {
     return Polynomials.x.value(t);
 }
@@ -270,12 +262,26 @@ double splines::Bezier::y_t(double t) {
     return Polynomials.y.value(t);
 }
 
+double splines::Bezier::y_x(double x) {
+    auto x_ = std::bind(&splines::Bezier::x_t, this, _1);
+    auto dx_dt_ = std::bind(&splines::Bezier::dx_dt, this, _1);
+    double t0 = root_finding::newton_raphson([&x_, &x](double t) {return x_(t) - x; }, dx_dt_, 0.5);
+    return y_t(t0);
+}
+
 double splines::Bezier::dx_dt(double t) {
     return Polynomials.dx_dt.value(t);
 }
 
 double splines::Bezier::dy_dt(double t) {
     return Polynomials.dy_dt.value(t);
+}
+
+double splines::Bezier::dy_dx(double x) {
+    auto x_ = std::bind(&splines::Bezier::x_t, this, _1);
+    auto dx_dt_ = std::bind(&splines::Bezier::dx_dt, this, _1);
+    double t0 = root_finding::newton_raphson([&x_, &x](double t) {return x_(t) - x; }, dx_dt_, 0.5);
+    return dy_dt(t0) / dx_dt(t0);
 }
 
 double splines::Bezier::p_i(int i, double t) const {

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-double* copyDynamicArray(const double* initial_array, int N) {
+double* arrays::copyDynamicArray(const double* initial_array, int N) {
 
     auto* destination = new double[N];
 
@@ -13,7 +13,7 @@ double* copyDynamicArray(const double* initial_array, int N) {
     return destination;
 }
 
-double** copyDynamicArray(double** initial_array, int N, int M) {
+double** arrays::copyDynamicArray(double** initial_array, int N, int M) {
 
     auto** destination = new double* [N];
     for (int i = 0; i < N; ++i) {
@@ -29,7 +29,7 @@ double** copyDynamicArray(double** initial_array, int N, int M) {
     return destination;
 }
 
-void quickSort(double* A, int in, bool ascending, int i0)
+void arrays::quickSort(double* A, int in, bool ascending, int i0)
 {
     if (i0 < in)
     {
@@ -39,7 +39,7 @@ void quickSort(double* A, int in, bool ascending, int i0)
     }
 }
 
-int partition(double* A, int i0, int in, bool ascending)
+int arrays::partition(double* A, int i0, int in, bool ascending)
 {
     int p = i0;
 
@@ -66,4 +66,9 @@ int partition(double* A, int i0, int in, bool ascending)
 
     std::swap(A[p], A[i0]);
     return p;
+}
+
+long long int math::factorial(int n)
+{
+    return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
 }

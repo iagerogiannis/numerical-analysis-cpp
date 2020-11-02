@@ -40,20 +40,21 @@ namespace splines {
         Bezier(Bezier&&) noexcept;
         Bezier& operator = (Bezier&&) noexcept;
 
-
         ~Bezier();
 
         void readControlPoints(std::string filename);
-
-        double y_x(double x);
 
         double x_t(double t);
 
         double y_t(double t);
 
+        double y_x(double x);
+
         double dx_dt(double t);
 
         double dy_dt(double t);
+
+        double dy_dx(double x);
 
         double p_i(int i, double t) const;
 

@@ -7,7 +7,7 @@
 
 using namespace std::placeholders;
 
-double integration::trapezoid(double(*f)(double), double x0, double xn, int n)
+double integration::trapezoid(std::function<double(double)> f, double x0, double xn, int n)
 {
 	double I = 0.;
 	double dx = (xn - x0) / n;
@@ -21,7 +21,7 @@ double integration::trapezoid(double(*f)(double), double x0, double xn, int n)
 	return I;
 }
 
-double integration::simpson1_3(double(*f)(double), double x0, double xn, int n)
+double integration::simpson1_3(std::function<double(double)> f, double x0, double xn, int n)
 {
 	double I = 0.;
 	double dx = (xn - x0) / n;
@@ -35,7 +35,7 @@ double integration::simpson1_3(double(*f)(double), double x0, double xn, int n)
 	return I;
 }
 
-double integration::simpson3_8(double(*f)(double), double x0, double xn, int n)
+double integration::simpson3_8(std::function<double(double)> f, double x0, double xn, int n)
 {
 	double I = 0.;
 	double dx = (xn - x0) / n;
@@ -50,7 +50,7 @@ double integration::simpson3_8(double(*f)(double), double x0, double xn, int n)
 	return I;
 }
 
-double integration::romberg(double(*f)(double), double x0, double xn, int level)
+double integration::romberg(std::function<double(double)> f, double x0, double xn, int level)
 {
 	double dx = (xn - x0) / pow(2, level - 1);
 
@@ -92,7 +92,7 @@ double integration::romberg(double(*f)(double), double x0, double xn, int level)
 	return I;
 }
 
-double integration::gauss_legendre(double(*f)(double), double x0, double xn, int n)
+double integration::gauss_legendre(std::function<double(double)> f, double x0, double xn, int n)
 {
 	Polynomial p = Polynomial::legendre(n + 1);
 	
