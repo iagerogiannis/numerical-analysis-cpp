@@ -15,6 +15,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C6CC941A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simple_test", "tests\simple_test\simple_test.vcxproj", "{ADFDD1BB-1369-43FF-90D2-B66F1B881C1E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{CEA23D17-14B4-4E87-8668-C3512B1987CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{778FB0C9-B904-4138-9597-7AC1E45DDBFF}"
+	ProjectSection(SolutionItems) = preProject
+		Release\include\cpp_extended.h = Release\include\cpp_extended.h
+		Release\include\numerical-analysis.h = Release\include\numerical-analysis.h
+		Release\include\Polynomial.h = Release\include\Polynomial.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib64", "lib64", "{E5CDC1E2-ADD7-4717-A768-1BE7C9697445}"
+	ProjectSection(SolutionItems) = preProject
+		Release\lib64\cpp-extended.lib = Release\lib64\cpp-extended.lib
+		Release\lib64\numerical-analysis.lib = Release\lib64\numerical-analysis.lib
+		Release\lib64\polynomial.lib = Release\lib64\polynomial.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib86", "lib86", "{684CB951-048E-4F1F-8F42-3B61F3E9971B}"
+	ProjectSection(SolutionItems) = preProject
+		Release\lib86\cpp-extended.lib = Release\lib86\cpp-extended.lib
+		Release\lib86\numerical-analysis.lib = Release\lib86\numerical-analysis.lib
+		Release\lib86\polynomial.lib = Release\lib86\polynomial.lib
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -63,6 +86,9 @@ Global
 		{C5BFCA96-7AA8-4B08-BE08-88A5575ED267} = {FC0EF70B-0928-450A-A81C-68B1A192B43E}
 		{7969ACE5-9E24-4E7D-833E-D28050CD8084} = {FC0EF70B-0928-450A-A81C-68B1A192B43E}
 		{ADFDD1BB-1369-43FF-90D2-B66F1B881C1E} = {C6CC941A-F3B6-41E7-B079-E8A89158F3B6}
+		{778FB0C9-B904-4138-9597-7AC1E45DDBFF} = {CEA23D17-14B4-4E87-8668-C3512B1987CB}
+		{E5CDC1E2-ADD7-4717-A768-1BE7C9697445} = {CEA23D17-14B4-4E87-8668-C3512B1987CB}
+		{684CB951-048E-4F1F-8F42-3B61F3E9971B} = {CEA23D17-14B4-4E87-8668-C3512B1987CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13C106CB-1815-45A2-97AF-D1EA2AC1431C}

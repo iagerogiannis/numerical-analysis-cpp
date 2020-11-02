@@ -22,6 +22,7 @@ void measurePerformance(std::function<void(void)> f) {
 int main() {
 
     splines::Bezier curve;
+
     curve.readControlPoints("control_points.dat");
 
     int points = 1000;
@@ -44,21 +45,21 @@ int main() {
     int rom_level = 12;
     int gl_level = 8;
 
-    //measurePerformance([&f, &x0, &x1]() {
-    //    std::cout << root_finding::secant(f, x0, x1) << std::endl; });
-    //measurePerformance([&f, &df_dx, &x2]() {
-    //    std::cout << root_finding::newton_raphson(f, df_dx, x2) << std::endl; });
+    measurePerformance([&f, &x0, &x1]() {
+        std::cout << root_finding::secant(f, x0, x1) << std::endl; });
+    measurePerformance([&f, &df_dx, &x2]() {
+        std::cout << root_finding::newton_raphson(f, df_dx, x2) << std::endl; });
 
-    //measurePerformance([&f, &x0, &xn, &n_]() {
-    //    std::cout << integration::trapezoid(f, x0, xn, n_) << std::endl; });
-    //measurePerformance([&f, &x0, &xn, &n_]() {
-    //    std::cout << integration::simpson1_3(f, x0, xn, n_) << std::endl; });
-    //measurePerformance([&f, &x0, &xn, &n_]() {
-    //    std::cout << integration::simpson3_8(f, x0, xn, n_) << std::endl; });
-    //measurePerformance([&f, &x0, &xn, &rom_level]() {
-    //    std::cout << integration::romberg(f, x0, xn, rom_level) << std::endl; });
-    //measurePerformance([&f, &x0, &xn, &gl_level](){
-    //    std::cout << integration::gauss_legendre(f, x0, xn, gl_level) << std::endl; });
+    measurePerformance([&f, &x0, &xn, &n_]() {
+        std::cout << integration::trapezoid(f, x0, xn, n_) << std::endl; });
+    measurePerformance([&f, &x0, &xn, &n_]() {
+        std::cout << integration::simpson1_3(f, x0, xn, n_) << std::endl; });
+    measurePerformance([&f, &x0, &xn, &n_]() {
+        std::cout << integration::simpson3_8(f, x0, xn, n_) << std::endl; });
+    measurePerformance([&f, &x0, &xn, &rom_level]() {
+        std::cout << integration::romberg(f, x0, xn, rom_level) << std::endl; });
+    measurePerformance([&f, &x0, &xn, &gl_level](){
+        std::cout << integration::gauss_legendre(f, x0, xn, gl_level) << std::endl; });
     
     std::cout << std::endl << "Press ENTER to Continue..." << std::endl;
     std::cin.get();
